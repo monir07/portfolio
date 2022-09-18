@@ -33,7 +33,8 @@ class HomeView(View):
     template_name = 'home/index.html'
 
     def get(self, request, *args, **kwargs):
+        user = request.user
         context = {
-            
+            'user': user,
         }
         return render(request, self.template_name, context)
