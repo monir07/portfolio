@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views import View
-
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 # Create your views here.
 class CustomPermissionMixin(PermissionRequiredMixin):
@@ -33,7 +34,7 @@ class HomeView(View):
     template_name = 'home/index.html'
 
     def get(self, request, *args, **kwargs):
-        user = request.user
+        user = get_object_or_404(User, pk='1')
         context = {
             'user': user,
         }

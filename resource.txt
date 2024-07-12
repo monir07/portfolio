@@ -1,0 +1,3 @@
+admin template: 
+https://github.com/app-generator/django-atlantis-dark
+https://github.com/app-generator/django-adminlte

@@ -13,7 +13,7 @@
         <!-- Favicon -->
         <link rel="shortcut icon" type="image/x-icon" href="{% static '' %}"/>
         <!--Title-->
-        <title>{% block title %}{{ user.first_name }} {% endblock %}|PortFolio</title>
+        <title>{% block title %}{{ user.first_name }}{% endblock %}|PortFolio</title>
         <!--Stylesheet-->
         {% block stylesheet %}
             {% include 'home/css.html' %}
@@ -49,7 +49,7 @@
         {% comment %} Feature Section {% endcomment %}
         <section id="serviceSection" class="py-5 container">
             <hr>
-            <span class="text-danger text-left fs-5">Feature</span>
+            <span class="text-danger text-left fs-5">Services</span>
             <p class="h1 myh1 fw-bold text-left text-dark my-3">What I Do</p>
             <div class="row row-cols-1 row-cols-md-3 g-4">                
                 {% for feature in user.my_service.all %}
@@ -65,46 +65,48 @@
                 <span class="text-danger text-left fs-5">VISIT MY PORTFOLIO AND KEEP YOUR FEEDBACK</span>
                 <p class="h1 myh1 fw-bold text-left text-dark my-3">My Portfolio</p>
             </div>
-            {% include 'components/portfolioCard.html' %}
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for portfolio in user.my_portfolio.all %}
+                    {% include 'components/portfolioCard.html' %}
+                {% endfor %}
+            </div>
         </section>
         {% comment %} resume section {% endcomment %}
         <section id="aboutSection" class="py-5 container">
             <hr>
             <div class="text-center">
-                <span class="text-danger text-left fs-5">7+ YEARS OF EXPERIENCE</span>
+                <span class="text-danger text-left fs-5">EXPERIENCE</span>
                 <p class="h1 myh1 fw-bold text-left text-dark my-3">My Resume</p>
             </div>
             <div class="d-md-flex">
                 <div class="col-md-4">
-                    <button class="toggleBtn educationBtn" onclick=resumeFilter('educationSection')>Education</button>
+                    <button class="toggleBtn educationBtn" onclick="resumeFilter('educationSection')">Education</button>
                 </div>
                 <div class="col-md-4">
-                    <button class="toggleBtn" onclick=resumeFilter('skillSection')>Professional Skill</button>
+                    <button class="toggleBtn" onclick="resumeFilter('skillSection')">Professional Skill</button>
                 </div>
                 <div class="col-md-4">
-                    <button class="toggleBtn experienceBtn" onclick=resumeFilter('experienceSection')>Experience</button>
+                    <button class="toggleBtn experienceBtn" onclick="resumeFilter('experienceSection')">Experience</button>
                 </div>    
             </div>
             {% comment %} professional skill {% endcomment %}
             <div class="row row-cols-1 row-cols-md-5 g-4 my-4 skillSection d-none" >
-                {% include 'components/skill.html' %}
-                {% include 'components/skill.html' %}
-                {% include 'components/skill.html' %}
-                {% include 'components/skill.html' %}
-                {% include 'components/skill.html' %}
+                {% for skill in user.my_skill.all %}
+                    {% include 'components/skill.html' %}
+                {% endfor %}
+                
             </div>            
             {% comment %} education background {% endcomment %}
             <div class="row row-cols-1 row-cols-md-2 g-4 my-4 educationSection">
-                {% include 'components/educationCard.html' %}
-                {% include 'components/educationCard.html' %}
-                {% include 'components/educationCard.html' %}
-                {% include 'components/educationCard.html' %}
+                {% for education in user.my_education.all %}
+                    {% include 'components/educationCard.html' %}
+                {% endfor %}
             </div>  
             {% comment %} Job Experince  {% endcomment %}
             <div class="row row-cols-1 row-cols-md-2 g-4 my-4 experienceSection d-none">
-                {% include 'components/experienceCard.html' %}
-                {% include 'components/experienceCard.html' %}
-                {% include 'components/experienceCard.html' %}
+                {% for experience in user.my_experience.all %}
+                    {% include 'components/experienceCard.html' %}
+                {% endfor %}
             </div>
         </section>
         {% comment %} Testimonials Section {% endcomment %}
@@ -115,9 +117,9 @@
                 <p class="h1 myh1 fw-bold text-left text-dark my-3">Testimonial</p>
             </div>
             <div class="single-item">
-                {% include 'components/testimonialCard.html' %}
-                {% include 'components/testimonialCard.html' %}
-                {% include 'components/testimonialCard.html' %}
+                {% for feedback in user.my_feedback.all %}
+                    {% include 'components/testimonialCard.html' %}
+                {% endfor %}
             </div>
         </section>
         {% comment %} Contact With me Section {% endcomment %}
